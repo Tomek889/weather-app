@@ -3,6 +3,7 @@ import './style.css';
 const input = document.querySelector('#location');
 const submitBtn = document.querySelector('#submitBtn');
 const errorMsg = document.querySelector('#errorMsg');
+const content = document.querySelector('#forecast');
 
 // eslint-disable-next-line consistent-return
 async function getForecast(location) {
@@ -31,6 +32,7 @@ async function processForecast(location) {
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
   errorMsg.textContent = '';
+  content.innerHTML = '';
   const location = input.value.trim();
   if (!location) {
     errorMsg.textContent = 'Please enter a location.';
@@ -41,7 +43,27 @@ submitBtn.addEventListener('click', (e) => {
     if (!data.length) {
       errorMsg.textContent = 'Invalid location or no forecast available.';
     } else {
-      console.log(data);
+      data.forEach((day) => {
+        const div = document.createElement('div');
+        div.classList.add('day');
+
+        const condition = document.createElement('p');
+        condition.classList.add('condition');
+        condition.textContent = day.conditions;
+
+        const date = document.createElement('p');
+        date.classList.add('date');
+        date.textContent = day.datetime;
+
+        const temp = document.createElement('p');
+        temp.classList.add('temp');
+        temp.textContent = `${day.temp}°F`;
+
+        div.appendChild(temp);
+        div.appendChild(condition);
+        div.appendChild(date);
+        content.appendChild(div);
+      });
     }
   });
 });
