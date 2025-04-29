@@ -2,6 +2,7 @@ import './style.css';
 
 const input = document.querySelector('#location');
 const submitBtn = document.querySelector('#submitBtn');
+const errorMsg = document.querySelector('#errorMsg');
 
 // eslint-disable-next-line consistent-return
 async function getForecast(location) {
@@ -29,11 +30,18 @@ async function processForecast(location) {
 
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
+  errorMsg.textContent = '';
   const location = input.value.trim();
   if (!location) {
+    errorMsg.textContent = 'Please enter a location.';
+    return;
   }
 
   processForecast(location).then((data) => {
-    console.log(data);
+    if (!data.length) {
+      errorMsg.textContent = 'Invalid location or no forecast available.';
+    } else {
+      console.log(data);
+    }
   });
 });
