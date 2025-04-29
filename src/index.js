@@ -14,8 +14,11 @@ async function getForecast(location) {
   }
 }
 
-function processForecast(location) {
-  getForecast(location).then((forecast) => {
-    console.log(forecast);
-  });
+async function processForecast(location) {
+  const forecastArray = await getForecast(location);
+  return forecastArray;
 }
+
+processForecast('cracow').then((data) => {
+  console.log(data);
+});
