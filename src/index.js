@@ -33,7 +33,7 @@ submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
   errorMsg.textContent = '';
   content.innerHTML = '';
-  const location = input.value.trim();
+  const location = input.value.trim().toLowerCase();
   if (!location) {
     errorMsg.textContent = 'Please enter a location.';
     return;
