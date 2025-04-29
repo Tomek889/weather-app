@@ -14,6 +14,8 @@ async function getForecast(location) {
   }
 }
 
-getForecast('cracow').then((forecast) => {
-  console.log(forecast);
-});
+function processForecast(location) {
+  getForecast(location).then((forecast) => {
+    console.log(forecast);
+  });
+}
