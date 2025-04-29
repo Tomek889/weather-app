@@ -1,5 +1,8 @@
 import './style.css';
 
+const input = document.querySelector('#location');
+const submitBtn = document.querySelector('#submitBtn');
+
 // eslint-disable-next-line consistent-return
 async function getForecast(location) {
   try {
@@ -15,10 +18,22 @@ async function getForecast(location) {
 }
 
 async function processForecast(location) {
-  const forecastArray = await getForecast(location);
+  const forecast = await getForecast(location);
+
+  if (!forecast || !forecast.days) {
+    return [];
+  }
+  const forecastArray = forecast.days.slice(0, 7);
   return forecastArray;
 }
 
-processForecast('cracow').then((data) => {
-  console.log(data);
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const location = input.value.trim();
+  if (!location) {
+  }
+
+  processForecast(location).then((data) => {
+    console.log(data);
+  });
 });
