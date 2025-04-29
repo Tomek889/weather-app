@@ -39,7 +39,10 @@ submitBtn.addEventListener('click', (e) => {
     return;
   }
 
+  content.innerHTML = '<p>Loading…</p>';
+
   processForecast(location).then((data) => {
+    content.innerHTML = '';
     if (!data.length) {
       errorMsg.textContent = 'Invalid location or no forecast available.';
     } else {

@@ -110,6 +110,7 @@ form button {
   justify-content: center;
   align-items: center;
   gap: 25px;
+  font-size: 1.2rem;
 }
 
 #forecast .day {
